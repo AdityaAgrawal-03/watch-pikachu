@@ -10,7 +10,9 @@ export function LikedVideos() {
     <>
       <h1>This is liked videos</h1>
       <h2>{liked.length}</h2>
-      {liked.map((videoItem) => <VideoCard key={videoItem?.id} videoItem={videoItem} />)}
+      {liked.map((videoItem) => (
+        <VideoCard key={videoItem?.id} videoItem={videoItem} />
+      ))}
     </>
   );
 }

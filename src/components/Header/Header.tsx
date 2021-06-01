@@ -17,9 +17,7 @@ export function Header() {
           </Link>
 
           <Link to="/watch-later">
-            <button className="btn btn-primary">
-              Watch Later
-            </button>
+            <button className="btn btn-primary">Watch Later</button>
           </Link>
 
           <Link to="/liked">

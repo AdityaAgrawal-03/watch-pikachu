@@ -12,4 +12,3 @@ export type Video = {
   channelName: string;
   channelLogo: string;
 };
-

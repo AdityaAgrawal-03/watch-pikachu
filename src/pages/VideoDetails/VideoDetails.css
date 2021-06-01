@@ -22,7 +22,6 @@
 }
 
 .video-details {
-  
   display: flex;
   flex-direction: column;
 }
@@ -37,5 +36,3 @@
   width: 3rem;
   height: 3rem;
 }
-
-
