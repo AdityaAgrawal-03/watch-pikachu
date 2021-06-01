@@ -1,0 +1,34 @@
+.video-card {
+  display: flex;
+  background-color: var(--default-color);
+  margin-bottom: 2rem;
+  
+}
+
+.video-thumbnail-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  max-width: 25rem;
+  min-width: 20rem;
+  max-height: 100%;
+  min-height: 10rem;
+}
+
+.video-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.video-title {
+  font-size: 1.2rem;
+}
+
+.video-title, .video-stats {
+  margin-top: 0.5rem;
+}
+
+.video-description {
+  margin-top: 1.5rem;
+}

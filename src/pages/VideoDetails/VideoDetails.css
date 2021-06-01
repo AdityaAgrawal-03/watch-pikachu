@@ -1,0 +1,41 @@
+.video-page {
+  margin: 1rem 4rem;
+  height: 90vh;
+}
+
+.video-container {
+  margin: 0 auto;
+}
+
+.player-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  /* Player ratio: 100 / (1280 / 720) */
+}
+
+.video {
+  width: 100%;
+  background-color: var(--default-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.video-details {
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-details {
+  display: flex;
+  align-items: center;
+}
+
+.channel-details img {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+
+

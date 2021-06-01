@@ -1,0 +1,9 @@
+.home-page {
+  margin: 1rem 4rem;
+  height: 90vh;
+}
+
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+}
