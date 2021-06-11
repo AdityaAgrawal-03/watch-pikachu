@@ -10,7 +10,7 @@ export function HistoryVideoCard({ videoItem }: VideoCardProps) {
 
   return (
     <>
-      <Link to={`/videoDetails/${id}`} className="link">
+      <Link to={`/video/${id}`} className="link">
         <div className="video-card history-video-card">
           <div className="video-thumbnail">
             <img

@@ -15,14 +15,12 @@ export function VideoCard({ videoItem }: VideoCardProps) {
 
   return (
     <>
-      <Link to={`/videoDetails/${video?.id}`} className="link">
+      <Link to={`/video/${video?.id}`} className="link">
         <div className="video-card">
           <div className="video-thumbnail">
             <img
               src={video?.thumbnail}
               alt="thumbnail"
-              // width="400px"
-              // height="200px"
               className="video-thumbnail-image"
             />
           </div>

@@ -1,4 +1,5 @@
 import { InitialState, Action } from "./reducer.types";
+import { v4 as uuidv4 } from "uuid";
 
 // const defaultPlaylistType = {
 //   playlistId: 999,
@@ -23,7 +24,7 @@ export const initialState: InitialState = {
   watchLater: [],
   playlist: [
     {
-      playlistId: 1,
+      playlistId: uuidv4(),
       name: "Watch Later",
       video: [],
     },
@@ -85,7 +86,7 @@ export const reducerFunc = (
         playlist: [
           ...state.playlist,
           {
-            playlistId: action.payload.id,
+            playlistId: action.payload.playlistId,
             name: action.payload.name,
             video: [action.payload.video],
           },

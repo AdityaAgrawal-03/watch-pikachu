@@ -7,6 +7,7 @@ import { Playlists } from "./pages/Playlists/Playlists";
 import { LikedVideos } from "./pages/Liked/Liked";
 import { History } from "./pages/History/History";
 import { VideoDetails } from "./pages/VideoDetails/VideoDetails";
+import { PlaylistDetails } from "./pages/PlaylistDetails/PlaylistDetails";
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
         <Route path="/playlists" element={<Playlists />} />
         <Route path="/liked" element={<LikedVideos />} />
         <Route path="/history" element={<History />} />
-        <Route path="/videoDetails/:videoId" element={<VideoDetails />} />
-      
+        <Route path="/video/:videoId" element={<VideoDetails />} />
+        <Route path="/playlist/:playlistId" element={<PlaylistDetails />} />
       </Routes>
     </div>
   );

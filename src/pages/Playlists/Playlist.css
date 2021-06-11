@@ -18,6 +18,11 @@
   background-color: var(--default-color);
 }
 
+.playlist-container-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
 .playlist-video-container {
   display: flex;
 }

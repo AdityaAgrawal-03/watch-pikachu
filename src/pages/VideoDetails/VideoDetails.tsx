@@ -1,9 +1,11 @@
+import { Dispatch, SetStateAction, useState } from "react";
 import { useParams } from "react-router";
 import ReactPlayer from "react-player/youtube";
+import { v4 as uuidv4 } from "uuid";
 import { data, defaultVideoType } from "../../data/data";
 import { useData } from "../../context/DataContext/DataContext";
 import "./VideoDetails.css";
-import { Dispatch, SetStateAction, useState } from "react";
+
 import { Video } from "../../data/data.types";
 
 export function VideoDetails() {
@@ -117,7 +119,7 @@ export function VideoDetails() {
   );
 }
 
-type ShowModalProps = {
+export type ShowModalProps = {
   setModal: Dispatch<SetStateAction<boolean>>;
   videoItem: Video;
 };
@@ -129,23 +131,26 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
     dispatch,
   } = useData();
   const { videoId } = useParams();
-  let idCounter = 2;
 
 
-  const isInPlaylist = (playlistId : number) => {
-    const playlistItem = playlist.find((playlistItem) => playlistItem.playlistId === playlistId)
-    return playlistItem?.video.find((video) => video.id === videoId) ? true : false;
-  } 
+  const isInPlaylist = (playlistId: string) => {
+    const playlistItem = playlist.find(
+      (playlistItem) => playlistItem.playlistId === playlistId
+    );
+    return playlistItem?.video.find((video) => video.id === videoId)
+      ? true
+      : false;
+  };
 
   const createPlaylist = () => {
     dispatch({
       type: "CREATE_PLAYLIST",
-      payload: { id: idCounter++, name: playlists, video: videoItem },
+      payload: { playlistId: uuidv4(), name: playlists, video: videoItem },
     });
     setPlaylists("");
   };
 
-  const addVideoToPlaylist = (playlistId: number) => {
+  const addVideoToPlaylist = (playlistId: string) => {
     dispatch({
       type: "ADD_TO_PLAYLIST",
       payload: { playlistId: playlistId, video: videoItem },
@@ -169,7 +174,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
                       onChange={() => addVideoToPlaylist(playlistId)}
                       checked={isInPlaylist(playlistId)}
                     />
-                    
+
                     {name}
                   </li>
                 ))}
@@ -184,10 +189,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
                 placeholder="add a playlist"
                 onChange={(e) => setPlaylists(() => e.target.value)}
               />
-              <button
-                className="btn-primary-icon"
-                onClick={createPlaylist}
-              >
+              <button className="btn-primary-icon" onClick={createPlaylist}>
                 <span className="material-icons-outlined">add</span>
               </button>
             </div>
