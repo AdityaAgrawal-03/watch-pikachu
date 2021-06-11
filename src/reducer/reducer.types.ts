@@ -5,10 +5,22 @@ export type Action =
   | { type: "ADD_TO_HISTORY"; payload: Video }
   | { type: "REMOVE_FROM_HISTORY"; payload: Video }
   | { type: "CLEAR_SEARCH_HISTORY" }
-  | { type: "TOGGLE_WATCH_LATER"; payload: Video };
+  | { type: "TOGGLE_WATCH_LATER"; payload: Video }
+  | { type: "CREATE_PLAYLIST"; payload: { id: number, name: string, video: Video } }
+  | { type: "ADD_TO_PLAYLIST"; payload: { playlistId: number, video: Video }}
 
 export type InitialState = {
   liked: Video[];
   history: Video[];
   watchLater: Video[];
+  playlist: Playlist[];
 };
+
+export type Playlist = {
+  playlistId: number;
+  name: string;
+  video: Video[];
+};
+
+
+

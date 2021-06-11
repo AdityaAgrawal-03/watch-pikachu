@@ -16,10 +16,7 @@ export function Header() {
             <button className="btn btn-primary">Playlists</button>
           </Link>
 
-          <Link to="/watch-later">
-            <button className="btn btn-primary">Watch Later</button>
-          </Link>
-
+          
           <Link to="/liked">
             <button className="btn btn-primary">Liked</button>
           </Link>
