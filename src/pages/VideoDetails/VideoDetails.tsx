@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import { data, defaultVideoType } from "../../data/data";
 import { useData } from "../../context/DataContext/DataContext";
 import "./VideoDetails.css";
-
 import { Video } from "../../data/data.types";
 
 export function VideoDetails() {
