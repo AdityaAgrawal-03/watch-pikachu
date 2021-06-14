@@ -114,6 +114,21 @@ export const reducerFunc = (
         }),
       };
 
+    case "UPDATE_PLAYLIST_NAME":
+      return {
+        ...state,
+        playlist: state.playlist.map((playlist) => {
+          if (playlist.playlistId === action.payload.playlistId) {
+            return {
+              ...playlist,
+              name: action.payload.name,
+            };
+          } else {
+            return { ...playlist }
+          }
+        })
+      };
+
     default:
       return state;
   }
