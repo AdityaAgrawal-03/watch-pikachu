@@ -1,11 +1,29 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
 import { useData } from "../../context/DataContext/DataContext";
 import "./PlaylistDetails.css";
 
+const defaultPlaylistType = {
+  playlistId: 999,
+  name: "aloo",
+  video: [
+    {
+      _id: "1234",
+      url: "bad url",
+      thumbnail: "bad thumbnail",
+      title: "some title",
+      statistics: "kuch toh hai",
+      description: "bekar video",
+      channelName: "does not exist",
+      channelLogo: "kuch nahi hai bhai",
+    },
+  ],
+};
+
 export function PlaylistDetails() {
   const { playlistId } = useParams();
+  const navigate = useNavigate();
   const {
     state: { playlist },
     dispatch,
@@ -18,17 +36,24 @@ export function PlaylistDetails() {
     (playlistItem) => playlistItem.playlistId === playlistId
   );
 
+  const playlistItem = getPlaylist ?? defaultPlaylistType;
+
+  console.log(getPlaylist?.name);
+
   return (
     <div className="playlist-detail-page">
       <div className="playlist-detail-heading">
         {!editButton ? (
-          <h1> {getPlaylist?.name} </h1>
+          <h1> {playlistItem.name} </h1>
         ) : (
           <input
             type="text"
-            placeholder="testing"
+            placeholder={playlistItem.name}
             className="input-text input-text-lg"
-            onChange={(e) => setPlaylistName(() => e.target.value)}
+            onChange={(e) => {
+              e.preventDefault();
+              setPlaylistName(() => e.target.value);
+            }}
           />
         )}
 
@@ -47,7 +72,7 @@ export function PlaylistDetails() {
                 setEditButton(!editButton);
                 dispatch({
                   type: "UPDATE_PLAYLIST_NAME",
-                  payload: { playlistId: playlistId, name: playlistName },
+                  payload: { playlistId: playlistId, name: playlistName === "" ? playlistItem.name : playlistName },
                 });
               }}
             >
@@ -55,14 +80,23 @@ export function PlaylistDetails() {
             </button>
           )}
 
-          <button className="btn-primary-icon">
+          <button
+            className="btn-primary-icon"
+            onClick={() => {
+              dispatch({
+                type: "DELETE_PLAYLIST",
+                payload: { playlistId: playlistId },
+              });
+              navigate("/playlists");
+            }}
+          >
             <span className="material-icons-round md-36">delete</span>
           </button>
         </div>
       </div>
       <div className="playlist-detail-video-container">
-        {getPlaylist?.video.map((videoItem) => (
-          <VideoCard key={videoItem.id} videoItem={videoItem} />
+        {playlistItem.video.map((videoItem) => (
+          <VideoCard key={videoItem._id} videoItem={videoItem} />
         ))}
       </div>
     </div>

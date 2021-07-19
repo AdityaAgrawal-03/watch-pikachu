@@ -25,9 +25,9 @@ export function Playlists() {
             </div>
 
             <div className="playlist-video-container">
-              {video.map(({ id, thumbnail, title }) => (
-                <Link to={`/video/${id}`} className="link">
-                  <div key={id} className="playlist-video-card">
+              {video.map(({ _id, thumbnail, title }) => (
+                <Link to={`/video/${_id}`} className="link">
+                  <div key={_id} className="playlist-video-card">
                     <div>
                       <img
                         src={thumbnail}

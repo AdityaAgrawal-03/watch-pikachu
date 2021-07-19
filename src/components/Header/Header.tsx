@@ -1,7 +1,11 @@
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext/AuthContext";
 
 export function Header() {
+  const { token, logout } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <div>
       <nav>
@@ -16,7 +20,6 @@ export function Header() {
             <button className="btn btn-primary">Playlists</button>
           </Link>
 
-          
           <Link to="/liked">
             <button className="btn btn-primary">Liked</button>
           </Link>
@@ -25,7 +28,12 @@ export function Header() {
             <button className="btn btn-primary">History</button>
           </Link>
 
-          <button className="btn btn-primary">Logout</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => (token ? logout() : navigate("/login"))}
+          >
+            {token ? "Logout" : "Login"}
+          </button>
         </div>
       </nav>
     </div>

@@ -1,21 +1,21 @@
 import "./VideoCard.css";
-
+import { useData } from "../../context/DataContext/DataContext";
 import { Link } from "react-router-dom";
 import { VideoCardProps } from "./videocard.types";
-import { data } from "../../data/data";
 
 export function VideoCard({ videoItem }: VideoCardProps) {
-  const { videos } = data;
+  const { state: { videos } } = useData();
+  // const { videos } = data;
 
-  const { id } = videoItem;
+  const { _id } = videoItem;
 
-  const video = videos.find((currentVideo) => currentVideo.id === id);
+  const video = videos.find((currentVideo) => currentVideo._id === _id);
 
   console.log({ video });
 
   return (
     <>
-      <Link to={`/video/${video?.id}`} className="link">
+      <Link to={`/video/${video?._id}`} className="link">
         <div className="video-card">
           <div className="video-thumbnail">
             <img

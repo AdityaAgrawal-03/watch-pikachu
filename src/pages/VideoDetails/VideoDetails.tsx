@@ -2,34 +2,34 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useParams } from "react-router";
 import ReactPlayer from "react-player/youtube";
 import { v4 as uuidv4 } from "uuid";
-import { data, defaultVideoType } from "../../data/data";
+import {  defaultVideoType } from "../../data/data";
 import { useData } from "../../context/DataContext/DataContext";
 import "./VideoDetails.css";
 import { Video } from "../../data/data.types";
 
 export function VideoDetails() {
   const { videoId } = useParams();
-  const { videos } = data;
+  
   const {
-    state: { liked, watchLater, history },
+    state: { videos, liked, watchLater, history },
     dispatch,
   } = useData();
 
   const [modal, setModal] = useState(false);
 
-  const video = videos.find((currentVideo) => currentVideo.id === videoId);
+  const video = videos.find((currentVideo) => currentVideo._id === videoId);
   const videoItem = video ?? defaultVideoType;
 
   const isInLiked = liked.find(
-    (likedVideoItem) => likedVideoItem.id === videoId
+    (likedVideoItem) => likedVideoItem._id === videoId
   );
 
   const isInWatchLater = watchLater.find(
-    (watchLaterVideoItem) => watchLaterVideoItem.id === videoId
+    (watchLaterVideoItem) => watchLaterVideoItem._id === videoId
   );
 
   const isInHistory = history.find(
-    (historyVideoItem) => historyVideoItem.id === videoId
+    (historyVideoItem) => historyVideoItem._id === videoId
   );
 
   return (
@@ -136,7 +136,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
     const playlistItem = playlist.find(
       (playlistItem) => playlistItem.playlistId === playlistId
     );
-    return playlistItem?.video.find((video) => video.id === videoId)
+    return playlistItem?.video.find((video) => video._id === videoId)
       ? true
       : false;
   };

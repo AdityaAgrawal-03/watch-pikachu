@@ -12,7 +12,7 @@ export function LikedVideos() {
       <h1>Liked</h1>
       <div className="liked-videos-container">
         {liked.map((videoItem) => (
-          <VideoCard key={videoItem?.id} videoItem={videoItem} />
+          <VideoCard key={videoItem?._id} videoItem={videoItem} />
         ))}
       </div>
     </div>

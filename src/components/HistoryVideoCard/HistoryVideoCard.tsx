@@ -4,13 +4,13 @@ import { VideoCardProps } from "../VideoCard/videocard.types";
 import "./HistoryVideoCard.css";
 
 export function HistoryVideoCard({ videoItem }: VideoCardProps) {
-  const { id, thumbnail, title, description } = videoItem;
+  const { _id, thumbnail, title, description } = videoItem;
 
   const { dispatch } = useData();
 
   return (
     <>
-      <Link to={`/video/${id}`} className="link">
+      <Link to={`/video/${_id}`} className="link">
         <div className="video-card history-video-card">
           <div className="video-thumbnail">
             <img

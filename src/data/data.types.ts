@@ -3,7 +3,7 @@ export type VideoData = {
 };
 
 export type Video = {
-  id: string;
+  _id: string;
   url: string;
   thumbnail: string;
   title: string;

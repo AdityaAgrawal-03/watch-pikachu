@@ -8,6 +8,9 @@ import { LikedVideos } from "./pages/Liked/Liked";
 import { History } from "./pages/History/History";
 import { VideoDetails } from "./pages/VideoDetails/VideoDetails";
 import { PlaylistDetails } from "./pages/PlaylistDetails/PlaylistDetails";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/Signup/Signup";
+import { PrivateRoute } from "./PrivateRoute";
 
 function App() {
   return (
@@ -15,11 +18,13 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/playlists" element={<Playlists />} />
-        <Route path="/liked" element={<LikedVideos />} />
-        <Route path="/history" element={<History />} />
+        <PrivateRoute path="/playlists" element={<Playlists />} />
+        <PrivateRoute path="/liked" element={<LikedVideos />} />
+        <PrivateRoute path="/history" element={<History />} />
+        <Route path="/login" element={ <Login /> } />
+        <Route path="/signup" element={ <Signup /> } />
         <Route path="/video/:videoId" element={<VideoDetails />} />
-        <Route path="/playlist/:playlistId" element={<PlaylistDetails />} />
+        <PrivateRoute path="/playlist/:playlistId" element={<PlaylistDetails />} />
       </Routes>
     </div>
   );

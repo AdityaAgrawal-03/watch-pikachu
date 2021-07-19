@@ -23,7 +23,7 @@ export function History() {
 
       <div className="history-videos-container">
         {history.map((videoItem) => (
-          <HistoryVideoCard key={videoItem.id} videoItem={videoItem} />
+          <HistoryVideoCard key={videoItem._id} videoItem={videoItem} />
         ))}
       </div>
     </div>

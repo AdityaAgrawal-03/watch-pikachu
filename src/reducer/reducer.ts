@@ -1,24 +1,8 @@
 import { InitialState, Action } from "./reducer.types";
 import { v4 as uuidv4 } from "uuid";
 
-// const defaultPlaylistType = {
-//   playlistId: 999,
-//   name: "aloo",
-//   video: [
-//     {
-//       id: "1234",
-//       url: "bad url",
-//       thumbnail: "bad thumbnail",
-//       title: "some title",
-//       statistics: "kuch toh hai",
-//       description: "bekar video",
-//       channelName: "does not exist",
-//       channelLogo: "kuch nahi hai bhai",
-//     },
-//   ],
-// };
-
 export const initialState: InitialState = {
+  videos: [],
   liked: [],
   history: [],
   watchLater: [],
@@ -36,15 +20,19 @@ export const reducerFunc = (
   action: Action
 ): InitialState => {
   switch (action.type) {
+    case "INITIALIZE_VIDEOS":
+      console.log("from reducer", action.payload);
+      return { ...state, videos: [...action.payload] };
+
     case "TOGGLE_LIKED":
       const isInLiked = state.liked.find(
-        (likedVideoItem) => likedVideoItem.id === action.payload.id
+        (likedVideoItem) => likedVideoItem._id === action.payload._id
       );
       if (isInLiked) {
         return {
           ...state,
           liked: state.liked.filter(
-            (likedVideoItem) => likedVideoItem.id !== action.payload.id
+            (likedVideoItem) => likedVideoItem._id !== action.payload._id
           ),
         };
       }
@@ -57,7 +45,7 @@ export const reducerFunc = (
       return {
         ...state,
         history: state.history.filter(
-          (historyVideoItem) => historyVideoItem.id !== action.payload.id
+          (historyVideoItem) => historyVideoItem._id !== action.payload._id
         ),
       };
 
@@ -66,7 +54,7 @@ export const reducerFunc = (
 
     case "TOGGLE_WATCH_LATER":
       const isInWatchLater = state.watchLater.find(
-        (watchLaterVideoItem) => watchLaterVideoItem.id === action.payload.id
+        (watchLaterVideoItem) => watchLaterVideoItem._id === action.payload._id
       );
 
       if (isInWatchLater) {
@@ -74,7 +62,7 @@ export const reducerFunc = (
           ...state,
           watchLater: state.watchLater.filter(
             (watchLaterVideoItem) =>
-              watchLaterVideoItem.id !== action.payload.id
+              watchLaterVideoItem._id !== action.payload._id
           ),
         };
       }
@@ -101,10 +89,10 @@ export const reducerFunc = (
             return {
               ...playlist,
               video: playlist.video.find(
-                (videoItem) => videoItem.id === action.payload.video.id
+                (videoItem) => videoItem._id === action.payload.video._id
               )
                 ? playlist.video.filter(
-                    (videoItem) => videoItem.id !== action.payload.video.id
+                    (videoItem) => videoItem._id !== action.payload.video._id
                   )
                 : [...playlist.video, action.payload.video],
             };
@@ -124,9 +112,17 @@ export const reducerFunc = (
               name: action.payload.name,
             };
           } else {
-            return { ...playlist }
+            return { ...playlist };
           }
-        })
+        }),
+      };
+
+    case "DELETE_PLAYLIST":
+      return {
+        ...state,
+        playlist: state.playlist.filter(
+          (playlist) => playlist.playlistId !== action.payload.playlistId
+        ),
       };
 
     default:

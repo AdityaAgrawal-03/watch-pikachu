@@ -3,7 +3,7 @@ import { VideoData, Video } from "./data.types";
 export const data: VideoData = {
   videos: [
     {
-      id: "9-vt7gPVCmA" ,
+      _id: "9-vt7gPVCmA" ,
       url: "https://www.youtube.com/watch?v=9-vt7gPVCmA",
       thumbnail: "https://img.youtube.com/vi/9-vt7gPVCmA/maxresdefault.jpg",
       title: "How To Choose A Cycling Buddy!",
@@ -13,7 +13,7 @@ export const data: VideoData = {
       channelLogo: "https://yt3.ggpht.com/ytc/AAUvwnhTfv0TDTol99arvnHmHi5J41sB682iFGUc0flXRQ=s88-c-k-c0x00ffffff-no-rj"
     },
     {
-      id: "I6LITUc8SMg",
+      _id: "I6LITUc8SMg",
       url: "https://www.youtube.com/watch?v=I6LITUc8SMg",
       thumbnail: "https://img.youtube.com/vi/I6LITUc8SMg/maxresdefault.jpg",
       title: "How To Ride In A Paceline | Through And Off Explained",
@@ -23,7 +23,7 @@ export const data: VideoData = {
       channelLogo: "https://yt3.ggpht.com/ytc/AAUvwnhTfv0TDTol99arvnHmHi5J41sB682iFGUc0flXRQ=s88-c-k-c0x00ffffff-no-rj"
     },
     {
-      id: "dkyN5jH--34",
+      _id: "dkyN5jH--34",
       url: "https://www.youtube.com/watch?v=dkyN5jH--34",
       thumbnail: "https://img.youtube.com/vi/dkyN5jH--34/maxresdefault.jpg",
       title: "How To Complete Your First 50km Bike Ride With Ease",
@@ -36,7 +36,7 @@ export const data: VideoData = {
 };
 
 export const defaultVideoType : Video = {
-  id: "1234",
+  _id: "1234",
   url: "bad url",
   thumbnail: "bad thumbnail",
   title: "some title",
