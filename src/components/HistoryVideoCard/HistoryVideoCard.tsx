@@ -1,3 +1,5 @@
+import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../../context/DataContext/DataContext";
 import { VideoCardProps } from "../VideoCard/videocard.types";
@@ -7,6 +9,19 @@ export function HistoryVideoCard({ videoItem }: VideoCardProps) {
   const { _id, thumbnail, title, description } = videoItem;
 
   const { dispatch } = useData();
+
+  const removeFromHistoryHandler = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const { data: { success, historyVideos } } = await axios.post("https://watch-pikachu-backend.aditya365.repl.co/history", {
+      video: {
+        _id: _id
+      }
+    });
+    console.log({ success, historyVideos });
+    if (success) {
+      dispatch({ type: "REMOVE_FROM_HISTORY", payload: videoItem });
+    }
+  }
 
   return (
     <>
@@ -27,10 +42,7 @@ export function HistoryVideoCard({ videoItem }: VideoCardProps) {
           </div>
           <button
             className="btn btn-primary-icon btn-history"
-            onClick={(e) => {
-              e.preventDefault();
-              dispatch({ type: "REMOVE_FROM_HISTORY", payload: videoItem });
-            }}
+            onClick={(e) => removeFromHistoryHandler(e)}
           >
             <span className="material-icons-round">cancel</span>
           </button>

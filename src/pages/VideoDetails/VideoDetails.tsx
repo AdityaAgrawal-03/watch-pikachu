@@ -2,14 +2,15 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useParams } from "react-router";
 import ReactPlayer from "react-player/youtube";
 import { v4 as uuidv4 } from "uuid";
-import {  defaultVideoType } from "../../data/data";
+import { defaultVideoType } from "../../data/data";
 import { useData } from "../../context/DataContext/DataContext";
 import "./VideoDetails.css";
 import { Video } from "../../data/data.types";
+import axios from "axios";
 
 export function VideoDetails() {
   const { videoId } = useParams();
-  
+
   const {
     state: { videos, liked, watchLater, history },
     dispatch,
@@ -32,6 +33,40 @@ export function VideoDetails() {
     (historyVideoItem) => historyVideoItem._id === videoId
   );
 
+  const likedVideosHandler = async () => {
+    const {
+      data: { success, likedVideos },
+    } = await axios.post(
+      "https://watch-pikachu-backend.aditya365.repl.co/liked",
+      {
+        video: {
+          _id: videoId,
+        },
+      }
+    );
+    console.log({ success, likedVideos });
+    if (success) {
+      dispatch({ type: "TOGGLE_LIKED", payload: videoItem });
+    }
+  };
+
+  const historyVideosHandler = async () => {
+    const {
+      data: { success, historyVideos },
+    } = await axios.post(
+      "https://watch-pikachu-backend.aditya365.repl.co/history",
+      {
+        video: {
+          _id: videoId,
+        },
+      }
+    );
+    console.log({ success, historyVideos });
+    if (success) {
+      dispatch({ type: "ADD_TO_HISTORY", payload: videoItem });
+    }
+  };
+
   return (
     <div className="video-page">
       {modal && <ShowModal setModal={setModal} videoItem={videoItem} />}
@@ -44,11 +79,7 @@ export function VideoDetails() {
             height="100%"
             controls
             pip={true}
-            onPlay={() =>
-              !isInHistory
-                ? dispatch({ type: "ADD_TO_HISTORY", payload: videoItem })
-                : null
-            }
+            onPlay={() => (!isInHistory ? historyVideosHandler() : null)}
           />
         </div>
 
@@ -64,18 +95,14 @@ export function VideoDetails() {
             {isInLiked ? (
               <button
                 className="btn-primary-icon"
-                onClick={() =>
-                  dispatch({ type: "TOGGLE_LIKED", payload: videoItem })
-                }
+                onClick={() => likedVideosHandler()}
               >
                 <span className="material-icons">thumb_up</span>
               </button>
             ) : (
               <button
                 className="btn-primary-icon"
-                onClick={() =>
-                  dispatch({ type: "TOGGLE_LIKED", payload: videoItem })
-                }
+                onClick={() => likedVideosHandler()}
               >
                 <span className="material-icons-outlined">thumb_up</span>
               </button>
@@ -131,29 +158,53 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
   } = useData();
   const { videoId } = useParams();
 
-
   const isInPlaylist = (playlistId: string) => {
+    console.log(typeof playlistId);
+
     const playlistItem = playlist.find(
-      (playlistItem) => playlistItem.playlistId === playlistId
+      (playlistItem) => playlistItem._id === playlistId
     );
-    return playlistItem?.video.find((video) => video._id === videoId)
+    console.log({ playlistItem });
+    return playlistItem?.videos.find((video) => video._id === videoId)
       ? true
       : false;
   };
 
-  const createPlaylist = () => {
-    dispatch({
-      type: "CREATE_PLAYLIST",
-      payload: { playlistId: uuidv4(), name: playlists, video: videoItem },
-    });
+  const createPlaylist = async () => {
+    const {
+      data: { success, newPlaylist },
+    } = await axios.post(
+      "https://watch-pikachu-backend.aditya365.repl.co/playlists",
+      {
+        name: playlists,
+        video: videoId,
+      }
+    );
+    if (success) {
+      dispatch({
+        type: "CREATE_PLAYLIST",
+        payload: { _id: newPlaylist._id, name: playlists, video: videoItem },
+      });
+    }
+
     setPlaylists("");
   };
 
-  const addVideoToPlaylist = (playlistId: string) => {
-    dispatch({
-      type: "ADD_TO_PLAYLIST",
-      payload: { playlistId: playlistId, video: videoItem },
-    });
+  const addVideoToPlaylist = async (playlistId: string) => {
+    const {
+      data: { success, playlist },
+    } = await axios.post(
+      `https://watch-pikachu-backend.aditya365.repl.co/playlists/${playlistId}`, {
+        videoId: videoId
+      }
+    );
+
+    if (success) {
+      dispatch({
+        type: "UPDATE_PLAYLIST",
+        payload: { _id: playlist._id, video: videoItem },
+      });
+    }
   };
 
   return (
@@ -166,12 +217,12 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
           <div className="dialog-body">
             <div>
               <ul style={{ listStyleType: "none" }}>
-                {playlist.map(({ playlistId, name, video }) => (
-                  <li key={playlistId}>
+                {playlist.map(({ _id, name, videos }) => (
+                  <li key={_id}>
                     <input
                       type="checkbox"
-                      onChange={() => addVideoToPlaylist(playlistId)}
-                      checked={isInPlaylist(playlistId)}
+                      onChange={() => addVideoToPlaylist(_id)}
+                      checked={isInPlaylist(_id)}
                     />
 
                     {name}

@@ -21,10 +21,13 @@ function App() {
         <PrivateRoute path="/playlists" element={<Playlists />} />
         <PrivateRoute path="/liked" element={<LikedVideos />} />
         <PrivateRoute path="/history" element={<History />} />
-        <Route path="/login" element={ <Login /> } />
-        <Route path="/signup" element={ <Signup /> } />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/video/:videoId" element={<VideoDetails />} />
-        <PrivateRoute path="/playlist/:playlistId" element={<PlaylistDetails />} />
+        <PrivateRoute
+          path="/playlist/:playlistId"
+          element={<PlaylistDetails />}
+        />
       </Routes>
     </div>
   );

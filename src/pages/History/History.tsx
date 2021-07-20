@@ -1,6 +1,7 @@
 import { useData } from "../../context/DataContext/DataContext";
 import { HistoryVideoCard } from "../../components/HistoryVideoCard/HistoryVideoCard";
 import "./History.css";
+import axios from "axios";
 
 export function History() {
   const {
@@ -8,13 +9,21 @@ export function History() {
     dispatch,
   } = useData();
 
+  const removeAllHistory = async () => {
+    const { data: { success } } = await axios.delete("https://watch-pikachu-backend.aditya365.repl.co/history");
+    console.log({ success })
+    if (success) {
+      dispatch({ type: "CLEAR_SEARCH_HISTORY" })
+    }
+  }
+
   return (
     <div className="history-page">
       <div className="history-page-heading">
         <h1>History</h1>
         <button
           className="btn btn-clear-history"
-          onClick={() => dispatch({ type: "CLEAR_SEARCH_HISTORY" })}
+          onClick={() => removeAllHistory()}
         >
           <span className="material-icons-round">delete</span>
           Clear All Watch History

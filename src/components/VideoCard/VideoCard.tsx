@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import { VideoCardProps } from "./videocard.types";
 
 export function VideoCard({ videoItem }: VideoCardProps) {
-  const { state: { videos } } = useData();
-  // const { videos } = data;
+  const {
+    state: { videos },
+  } = useData();
 
   const { _id } = videoItem;
 
   const video = videos.find((currentVideo) => currentVideo._id === _id);
-
-  console.log({ video });
 
   return (
     <>

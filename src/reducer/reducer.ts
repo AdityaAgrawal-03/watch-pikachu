@@ -1,18 +1,11 @@
 import { InitialState, Action } from "./reducer.types";
-import { v4 as uuidv4 } from "uuid";
 
 export const initialState: InitialState = {
   videos: [],
   liked: [],
   history: [],
   watchLater: [],
-  playlist: [
-    {
-      playlistId: uuidv4(),
-      name: "Watch Later",
-      video: [],
-    },
-  ],
+  playlist: [],
 };
 
 export const reducerFunc = (
@@ -21,8 +14,17 @@ export const reducerFunc = (
 ): InitialState => {
   switch (action.type) {
     case "INITIALIZE_VIDEOS":
-      console.log("from reducer", action.payload);
       return { ...state, videos: [...action.payload] };
+
+    case "INITIALIZE_LIKED_VIDEOS":
+      return { ...state, liked: [...action.payload] };
+
+    case "INITIALIZE_HISTORY_VIDEOS":
+      return { ...state, history: [...action.payload] };
+
+    case "INITIALIZE_PLAYLISTS":
+     
+      return { ...state, playlist: [...action.payload] }
 
     case "TOGGLE_LIKED":
       const isInLiked = state.liked.find(
@@ -74,27 +76,27 @@ export const reducerFunc = (
         playlist: [
           ...state.playlist,
           {
-            playlistId: action.payload.playlistId,
+            _id: action.payload._id,
             name: action.payload.name,
-            video: [action.payload.video],
+            videos: [action.payload.video],
           },
         ],
       };
 
-    case "ADD_TO_PLAYLIST":
+    case "UPDATE_PLAYLIST":
       return {
         ...state,
         playlist: state.playlist.map((playlist) => {
-          if (playlist.playlistId === action.payload.playlistId) {
+          if (playlist._id === action.payload._id) {
             return {
               ...playlist,
-              video: playlist.video.find(
+              videos: playlist.videos.find(
                 (videoItem) => videoItem._id === action.payload.video._id
               )
-                ? playlist.video.filter(
+                ? playlist.videos.filter(
                     (videoItem) => videoItem._id !== action.payload.video._id
                   )
-                : [...playlist.video, action.payload.video],
+                : [...playlist.videos, action.payload.video],
             };
           } else {
             return { ...playlist };
@@ -106,7 +108,7 @@ export const reducerFunc = (
       return {
         ...state,
         playlist: state.playlist.map((playlist) => {
-          if (playlist.playlistId === action.payload.playlistId) {
+          if (playlist._id === action.payload.playlistId) {
             return {
               ...playlist,
               name: action.payload.name,
@@ -121,7 +123,7 @@ export const reducerFunc = (
       return {
         ...state,
         playlist: state.playlist.filter(
-          (playlist) => playlist.playlistId !== action.payload.playlistId
+          (playlist) => playlist._id !== action.payload.playlistId
         ),
       };
 

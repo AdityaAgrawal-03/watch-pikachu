@@ -7,7 +7,7 @@ import "./PlaylistDetails.css";
 const defaultPlaylistType = {
   playlistId: 999,
   name: "aloo",
-  video: [
+  videos: [
     {
       _id: "1234",
       url: "bad url",
@@ -33,7 +33,7 @@ export function PlaylistDetails() {
   const [playlistName, setPlaylistName] = useState("");
 
   const getPlaylist = playlist.find(
-    (playlistItem) => playlistItem.playlistId === playlistId
+    (playlistItem) => playlistItem._id === playlistId
   );
 
   const playlistItem = getPlaylist ?? defaultPlaylistType;
@@ -72,7 +72,11 @@ export function PlaylistDetails() {
                 setEditButton(!editButton);
                 dispatch({
                   type: "UPDATE_PLAYLIST_NAME",
-                  payload: { playlistId: playlistId, name: playlistName === "" ? playlistItem.name : playlistName },
+                  payload: {
+                    playlistId: playlistId,
+                    name:
+                      playlistName === "" ? playlistItem.name : playlistName,
+                  },
                 });
               }}
             >
@@ -95,7 +99,7 @@ export function PlaylistDetails() {
         </div>
       </div>
       <div className="playlist-detail-video-container">
-        {playlistItem.video.map((videoItem) => (
+        {playlistItem.videos.map((videoItem) => (
           <VideoCard key={videoItem._id} videoItem={videoItem} />
         ))}
       </div>

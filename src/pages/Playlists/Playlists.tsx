@@ -13,11 +13,11 @@ export function Playlists() {
     <div className="playlist-page">
       <h1> Playlists </h1>
       <div className="playlists-wrapper">
-        {playlist.map(({ playlistId, name, video }) => (
-          <div key={playlistId} className="playlist-container">
+        {playlist.map(({ _id, name, videos }) => (
+          <div key={_id} className="playlist-container">
             <div className="playlist-container-heading">
               <h2> {name} </h2>
-              <Link to={`/playlist/${playlistId}`} className="link">
+              <Link to={`/playlist/${_id}`} className="link">
                 <button className="btn btn-primary-icon">
                   <span className="material-icons-round">open_in_new</span>
                 </button>
@@ -25,7 +25,7 @@ export function Playlists() {
             </div>
 
             <div className="playlist-video-container">
-              {video.map(({ _id, thumbnail, title }) => (
+              {videos.map(({ _id, thumbnail, title }) => (
                 <Link to={`/video/${_id}`} className="link">
                   <div key={_id} className="playlist-video-card">
                     <div>
