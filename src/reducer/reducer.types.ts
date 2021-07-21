@@ -9,10 +9,9 @@ export type Action =
   | { type: "ADD_TO_HISTORY"; payload: Video }
   | { type: "REMOVE_FROM_HISTORY"; payload: Video }
   | { type: "CLEAR_SEARCH_HISTORY" }
-  | { type: "TOGGLE_WATCH_LATER"; payload: Video }
   | {
       type: "CREATE_PLAYLIST";
-      payload: { _id: string, name: string; video: Video };
+      payload: { _id: string; name: string; video: Video };
     }
   | { type: "UPDATE_PLAYLIST"; payload: { _id: string; video: Video } }
   | {

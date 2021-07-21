@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
@@ -38,7 +39,48 @@ export function PlaylistDetails() {
 
   const playlistItem = getPlaylist ?? defaultPlaylistType;
 
-  console.log(getPlaylist?.name);
+  const updatePlaylistName = async () => {
+    setEditButton(!editButton);
+    try {
+      const {
+        data: { success, updatedPlaylist },
+      } = await axios.post(
+        `https://watch-pikachu-backend.aditya365.repl.co/playlists/${playlistId}`,
+        {
+          playlistUpdatedName: playlistName,
+        }
+      );
+
+      console.log({ success, updatedPlaylist });
+
+      if (success) {
+        dispatch({
+          type: "UPDATE_PLAYLIST_NAME",
+          payload: {
+            playlistId: playlistId,
+            name: updatedPlaylist.name
+          },
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deletePlaylist = async () => {
+    try {
+      const { data: { success } } = await axios.delete( `https://watch-pikachu-backend.aditya365.repl.co/playlists/${playlistId}`);
+      if (success) {
+        dispatch({
+          type: "DELETE_PLAYLIST",
+          payload: { playlistId: playlistId },
+        });
+        navigate("/playlists");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="playlist-detail-page">
@@ -68,17 +110,7 @@ export function PlaylistDetails() {
           ) : (
             <button
               className="btn-primary-icon"
-              onClick={() => {
-                setEditButton(!editButton);
-                dispatch({
-                  type: "UPDATE_PLAYLIST_NAME",
-                  payload: {
-                    playlistId: playlistId,
-                    name:
-                      playlistName === "" ? playlistItem.name : playlistName,
-                  },
-                });
-              }}
+              onClick={() => updatePlaylistName()}
             >
               <span className="material-icons-round md-36">check_circle</span>
             </button>
@@ -86,13 +118,7 @@ export function PlaylistDetails() {
 
           <button
             className="btn-primary-icon"
-            onClick={() => {
-              dispatch({
-                type: "DELETE_PLAYLIST",
-                payload: { playlistId: playlistId },
-              });
-              navigate("/playlists");
-            }}
+            onClick={() => deletePlaylist()}
           >
             <span className="material-icons-round md-36">delete</span>
           </button>

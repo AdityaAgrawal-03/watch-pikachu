@@ -23,8 +23,7 @@ export const reducerFunc = (
       return { ...state, history: [...action.payload] };
 
     case "INITIALIZE_PLAYLISTS":
-     
-      return { ...state, playlist: [...action.payload] }
+      return { ...state, playlist: [...action.payload] };
 
     case "TOGGLE_LIKED":
       const isInLiked = state.liked.find(
@@ -53,22 +52,6 @@ export const reducerFunc = (
 
     case "CLEAR_SEARCH_HISTORY":
       return { ...state, history: [] };
-
-    case "TOGGLE_WATCH_LATER":
-      const isInWatchLater = state.watchLater.find(
-        (watchLaterVideoItem) => watchLaterVideoItem._id === action.payload._id
-      );
-
-      if (isInWatchLater) {
-        return {
-          ...state,
-          watchLater: state.watchLater.filter(
-            (watchLaterVideoItem) =>
-              watchLaterVideoItem._id !== action.payload._id
-          ),
-        };
-      }
-      return { ...state, watchLater: [...state.watchLater, action.payload] };
 
     case "CREATE_PLAYLIST":
       return {
