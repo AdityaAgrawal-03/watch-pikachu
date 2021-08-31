@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useData } from "../../context/DataContext/DataContext";
 import { VideoCardProps } from "../VideoCard/videocard.types";
 import "./HistoryVideoCard.css";
+import { API_URL } from "../../utils/index"
 
 export function HistoryVideoCard({ videoItem }: VideoCardProps) {
   const { _id, thumbnail, title, description } = videoItem;
@@ -12,7 +13,7 @@ export function HistoryVideoCard({ videoItem }: VideoCardProps) {
 
   const removeFromHistoryHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const { data: { success, historyVideos } } = await axios.post("https://watch-pikachu-backend.aditya365.repl.co/history", {
+    const { data: { success, historyVideos } } = await axios.post(`${API_URL}/history`, {
       video: {
         _id: _id
       }

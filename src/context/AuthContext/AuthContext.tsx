@@ -12,22 +12,25 @@ export function setupAuthHeaderForServiceCalls(token: string) {
   if (token) {
     return (axios.defaults.headers.common["Authorization"] = token);
   }
-  return axios.defaults.headers.common["Authorization"] = null;
+  return (axios.defaults.headers.common["Authorization"] = null);
 }
 
- function setupAuthExceptionHandler(logout: () => void, navigate: NavigateFunction){
+function setupAuthExceptionHandler(
+  logout: () => void,
+  navigate: NavigateFunction
+) {
   const UNAUTHORIZED = 401;
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
       if (error?.response?.status === UNAUTHORIZED) {
-        console.log("from auth handler")
+        console.log("from auth handler");
         logout();
         navigate("/login");
       }
       return Promise.reject(error);
     }
-  )
+  );
 }
 
 type AuthProviderProps = {
@@ -38,13 +41,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const getTokenFromLocalStorage = JSON.parse(
     localStorage?.getItem("token") as string
   );
-  console.log({ getTokenFromLocalStorage })
   const [token, setToken] = useState(getTokenFromLocalStorage?.token);
   const navigate = useNavigate();
 
   useEffect(() => {
     setupAuthExceptionHandler(logout, navigate);
-  })
+  });
 
   const loginUser: LoginUser = async (email, password) => {
     try {

@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
 import { useData } from "../../context/DataContext/DataContext";
 import "./PlaylistDetails.css";
+import { API_URL } from "../../utils/index"
 
 const defaultPlaylistType = {
   playlistId: 999,
@@ -45,7 +46,7 @@ export function PlaylistDetails() {
       const {
         data: { success, updatedPlaylist },
       } = await axios.post(
-        `https://watch-pikachu-backend.aditya365.repl.co/playlists/${playlistId}`,
+        `${API_URL}/playlists/${playlistId}`,
         {
           playlistUpdatedName: playlistName,
         }
@@ -58,7 +59,7 @@ export function PlaylistDetails() {
           type: "UPDATE_PLAYLIST_NAME",
           payload: {
             playlistId: playlistId,
-            name: updatedPlaylist.name
+            name: updatedPlaylist.name,
           },
         });
       }
@@ -69,7 +70,11 @@ export function PlaylistDetails() {
 
   const deletePlaylist = async () => {
     try {
-      const { data: { success } } = await axios.delete( `https://watch-pikachu-backend.aditya365.repl.co/playlists/${playlistId}`);
+      const {
+        data: { success },
+      } = await axios.delete(
+        `${API_URL}/playlists/${playlistId}`
+      );
       if (success) {
         dispatch({
           type: "DELETE_PLAYLIST",
@@ -116,10 +121,7 @@ export function PlaylistDetails() {
             </button>
           )}
 
-          <button
-            className="btn-primary-icon"
-            onClick={() => deletePlaylist()}
-          >
+          <button className="btn-primary-icon" onClick={() => deletePlaylist()}>
             <span className="material-icons-round md-36">delete</span>
           </button>
         </div>

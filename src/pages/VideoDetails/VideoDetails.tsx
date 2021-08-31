@@ -7,6 +7,7 @@ import "./VideoDetails.css";
 import { Video } from "../../data/data.types";
 import { Playlist } from "../../reducer/reducer.types";
 import axios from "axios";
+import { API_URL } from "../../utils/index"
 
 export function VideoDetails() {
   const { videoId } = useParams();
@@ -42,7 +43,7 @@ export function VideoDetails() {
       const {
         data: { success, playlist },
       } = await axios.post(
-        `https://watch-pikachu-backend.aditya365.repl.co/playlists/${playlistId}/${videoId}`
+        `${API_URL}/playlists/${playlistId}/${videoId}`
       );
 
       if (success) {
@@ -61,7 +62,7 @@ export function VideoDetails() {
       const {
         data: { success, likedVideos },
       } = await axios.post(
-        "https://watch-pikachu-backend.aditya365.repl.co/liked",
+        `${API_URL}/liked`,
         {
           video: {
             _id: videoId,
@@ -82,7 +83,7 @@ export function VideoDetails() {
       const {
         data: { success, historyVideos },
       } = await axios.post(
-        "https://watch-pikachu-backend.aditya365.repl.co/history",
+        `${API_URL}/history`,
         {
           video: {
             _id: videoId,
@@ -202,7 +203,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
       const {
         data: { success, newPlaylist },
       } = await axios.post(
-        "https://watch-pikachu-backend.aditya365.repl.co/playlists",
+        `${API_URL}/playlists`,
         {
           name: playlists,
           video: videoId,
@@ -226,7 +227,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
       const {
         data: { success, playlist },
       } = await axios.post(
-        `https://watch-pikachu-backend.aditya365.repl.co/playlists/${playlistId}/${videoId}`
+        `${API_URL}/playlists/${playlistId}/${videoId}`
       );
 
       if (success) {

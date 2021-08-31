@@ -2,7 +2,10 @@ import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { DataContextTypes } from "./dataContext.types";
 import { reducerFunc, initialState } from "../../reducer/reducer";
 import axios from "axios";
-import { useAuth, setupAuthHeaderForServiceCalls } from "../AuthContext/AuthContext";
+import {
+  useAuth,
+  setupAuthHeaderForServiceCalls,
+} from "../AuthContext/AuthContext";
 
 export type DataProviderProps = {
   children: React.ReactNode;
@@ -39,21 +42,36 @@ export const DataProvider = ({ children }: DataProviderProps) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const { data: { likedVideos } } = await axios.get(
+        const {
+          data: { likedVideos },
+        } = await axios.get(
           "https://watch-pikachu-backend.aditya365.repl.co/liked"
         );
-        dispatch({ type: "INITIALIZE_LIKED_VIDEOS", payload: likedVideos.videos })
+        dispatch({
+          type: "INITIALIZE_LIKED_VIDEOS",
+          payload: likedVideos.videos,
+        });
 
-        const {data: {historyVideos }} = await axios.get(
+        const {
+          data: { historyVideos },
+        } = await axios.get(
           "https://watch-pikachu-backend.aditya365.repl.co/history"
         );
-        dispatch({ type: "INITIALIZE_HISTORY_VIDEOS", payload: historyVideos.videos })
-        console.log({ historyVideos });
-        const {data: { playlists }} = await axios.get(
+        dispatch({
+          type: "INITIALIZE_HISTORY_VIDEOS",
+          payload: historyVideos.videos,
+        });
+
+        const {
+          data: { playlists },
+        } = await axios.get(
           "https://watch-pikachu-backend.aditya365.repl.co/playlists"
         );
-        dispatch({ type: "INITIALIZE_PLAYLISTS", payload: playlists.playlists })
-        console.log({ playlists })
+        dispatch({
+          type: "INITIALIZE_PLAYLISTS",
+          payload: playlists.playlists,
+        });
+        console.log({ playlists });
       } catch (error) {
         console.error(error);
       }

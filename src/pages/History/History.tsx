@@ -2,6 +2,7 @@ import { useData } from "../../context/DataContext/DataContext";
 import { HistoryVideoCard } from "../../components/HistoryVideoCard/HistoryVideoCard";
 import "./History.css";
 import axios from "axios";
+import { API_URL } from "../../utils/index"
 
 export function History() {
   const {
@@ -10,12 +11,16 @@ export function History() {
   } = useData();
 
   const removeAllHistory = async () => {
-    const { data: { success } } = await axios.delete("https://watch-pikachu-backend.aditya365.repl.co/history");
-    console.log({ success })
+    const {
+      data: { success },
+    } = await axios.delete(
+      `${API_URL}/history`
+    );
+    console.log({ success });
     if (success) {
-      dispatch({ type: "CLEAR_SEARCH_HISTORY" })
+      dispatch({ type: "CLEAR_SEARCH_HISTORY" });
     }
-  }
+  };
 
   return (
     <div className="history-page">
