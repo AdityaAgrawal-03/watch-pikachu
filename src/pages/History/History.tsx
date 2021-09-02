@@ -16,7 +16,7 @@ export function History() {
     } = await axios.delete(
       `${API_URL}/history`
     );
-    console.log({ success });
+   
     if (success) {
       dispatch({ type: "CLEAR_SEARCH_HISTORY" });
     }

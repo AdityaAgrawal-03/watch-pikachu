@@ -13,7 +13,7 @@ export function Header() {
           <Link to="/">
             <button className="btn btn-primary">PIKACHU</button>
           </Link>
-        </div>
+        </div>``
 
         <div className="nav-icons">
           <Link to="/playlists">

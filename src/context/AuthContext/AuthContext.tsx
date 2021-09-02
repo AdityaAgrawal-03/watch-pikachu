@@ -24,7 +24,6 @@ function setupAuthExceptionHandler(
     (response) => response,
     (error) => {
       if (error?.response?.status === UNAUTHORIZED) {
-        console.log("from auth handler");
         logout();
         navigate("/login");
       }

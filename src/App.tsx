@@ -25,7 +25,7 @@ function App() {
         <PrivateRoute path="/history" element={<History />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/video/:videoId" element={<VideoDetails />} />
+        <PrivateRoute path="/video/:videoId" element={<VideoDetails />} />
         <PrivateRoute
           path="/playlist/:playlistId"
           element={<PlaylistDetails />}
