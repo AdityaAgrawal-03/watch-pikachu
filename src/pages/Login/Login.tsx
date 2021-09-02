@@ -5,7 +5,6 @@ import { useAuth } from "../../context/AuthContext/AuthContext";
 export function Login() {
   const { loginUser } = useAuth();
   const navigate = useNavigate();
-  
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +13,18 @@ export function Login() {
     e.preventDefault();
     try {
       const { success } = await loginUser(email, password);
+
+      if (success) {
+        navigate("/", { replace: true });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const setGuestCredentials = async () => {
+    try {
+      const { success } = await loginUser("test@gmail.com", "test");
 
       if (success) {
         navigate("/", { replace: true });
@@ -41,7 +52,7 @@ export function Login() {
           <input
             id="password"
             name="password"
-            type={password}
+            type="password"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(() => e.target.value)}
@@ -49,11 +60,11 @@ export function Login() {
           <button type="submit"> Login </button>
         </form>
       </div>
+      <button onClick={setGuestCredentials}> Use guest credentials </button>
       <div>
-        Not a member yet?{" "}
+        Not a member yet?
         <Link to="/signup" className="link">
-          {" "}
-          Signup{" "}
+          Signup
         </Link>
       </div>
     </>
