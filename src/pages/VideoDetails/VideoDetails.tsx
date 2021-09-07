@@ -7,7 +7,7 @@ import "./VideoDetails.css";
 import { Video } from "../../data/data.types";
 import { Playlist } from "../../reducer/reducer.types";
 import axios from "axios";
-import { API_URL } from "../../utils/index"
+import { API_URL } from "../../utils/index";
 
 export function VideoDetails() {
   const { videoId } = useParams();
@@ -42,9 +42,7 @@ export function VideoDetails() {
     try {
       const {
         data: { success, playlist },
-      } = await axios.post(
-        `${API_URL}/playlists/${playlistId}/${videoId}`
-      );
+      } = await axios.post(`${API_URL}/playlists/${playlistId}/${videoId}`);
 
       if (success) {
         dispatch({
@@ -61,14 +59,11 @@ export function VideoDetails() {
     try {
       const {
         data: { success, likedVideos },
-      } = await axios.post(
-        `${API_URL}/liked`,
-        {
-          video: {
-            _id: videoId,
-          },
-        }
-      );
+      } = await axios.post(`${API_URL}/liked`, {
+        video: {
+          _id: videoId,
+        },
+      });
       console.log({ success, likedVideos });
       if (success) {
         dispatch({ type: "TOGGLE_LIKED", payload: videoItem });
@@ -82,14 +77,11 @@ export function VideoDetails() {
     try {
       const {
         data: { success, historyVideos },
-      } = await axios.post(
-        `${API_URL}/history`,
-        {
-          video: {
-            _id: videoId,
-          },
-        }
-      );
+      } = await axios.post(`${API_URL}/history`, {
+        video: {
+          _id: videoId,
+        },
+      });
       console.log({ success, historyVideos });
       if (success) {
         dispatch({ type: "ADD_TO_HISTORY", payload: videoItem });
@@ -165,8 +157,14 @@ export function VideoDetails() {
         <hr />
 
         <div className="channel-details">
-          <img src={video?.channelLogo} alt="channel-logo"></img>
-          <h3>{video?.channelName}</h3>
+          <div className="channel-details-content">
+            <img src={video?.channelLogo} alt="channel-logo"></img>
+            <h3>{video?.channelName}</h3>
+          </div>
+
+          <div className="video-description">
+            <p> {video?.description} </p>
+          </div>
         </div>
       </div>
     </div>
@@ -202,13 +200,10 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
     try {
       const {
         data: { success, newPlaylist },
-      } = await axios.post(
-        `${API_URL}/playlists`,
-        {
-          name: playlists,
-          video: videoId,
-        }
-      );
+      } = await axios.post(`${API_URL}/playlists`, {
+        name: playlists,
+        video: videoId,
+      });
       if (success) {
         dispatch({
           type: "CREATE_PLAYLIST",
@@ -226,9 +221,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
     try {
       const {
         data: { success, playlist },
-      } = await axios.post(
-        `${API_URL}/playlists/${playlistId}/${videoId}`
-      );
+      } = await axios.post(`${API_URL}/playlists/${playlistId}/${videoId}`);
 
       if (success) {
         dispatch({
