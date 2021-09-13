@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { NavigateFunction } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { AuthContextTypes, LoginUser, SignupUser } from "./authContext.types";
+import { API_URL } from "../../utils/index";
 
 export const AuthContext = createContext<AuthContextTypes>(
   {} as AuthContextTypes
@@ -51,13 +52,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const {
         data: { success, token },
-      } = await axios.post(
-        "https://watch-pikachu-backend.aditya365.repl.co/login",
-        {
-          email,
-          password,
-        }
-      );
+      } = await axios.post(`${API_URL}/login`, {
+        email,
+        password,
+      });
 
       if (success) {
         setToken(token);
@@ -74,14 +72,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const {
         data: { success, token },
-      } = await axios.post(
-        "https://watch-pikachu-backend.aditya365.repl.co/signup",
-        {
-          username,
-          email,
-          password,
-        }
-      );
+      } = await axios.post(`${API_URL}/signup`, {
+        username,
+        email,
+        password,
+      });
       if (success) {
         setToken(token);
         localStorage?.setItem("token", JSON.stringify({ token: token }));

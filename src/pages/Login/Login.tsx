@@ -23,28 +23,19 @@ export function Login() {
     }
   };
 
-  const setGuestCredentials = async () => {
-    setEmail("test@gmail.com");
-    setPassword("test");
-    try {
-      const { success } = await loginUser("test@gmail.com", "test");
-
-      if (success) {
-        navigate("/", { replace: true });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <div className="login-page">
       <div className="login-page-content">
         <div className="login-form-heading">
           <h1> Login </h1>
-          <button onClick={setGuestCredentials} className="btn-guest">
-            {" "}
-            Use guest credentials{" "}
+          <button
+            onClick={() => {
+              setEmail("test@gmail.com");
+              setPassword("test");
+            }}
+            className="btn-guest"
+          >
+            Use guest credentials
           </button>
         </div>
         <div className="login-form">
@@ -74,7 +65,6 @@ export function Login() {
               onChange={(e) => setPassword(() => e.target.value)}
             />
             <button type="submit" className="btn btn-primary btn-login">
-              
               Login
             </button>
           </form>
