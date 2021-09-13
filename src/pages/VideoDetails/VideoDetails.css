@@ -92,3 +92,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.dialog-checkbox {
+  margin-right: 0.5rem;
+}
+
+.btn-dialog {
+  font-size: var(--fontSizes-md);
+  margin-left: 0.5rem;
+}
+
+.dialog-input {
+  margin-top: 0.5rem;
+}

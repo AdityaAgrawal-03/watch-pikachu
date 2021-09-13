@@ -7,8 +7,6 @@ export function Playlists() {
     state: { playlist },
   } = useData();
 
-  console.log({ playlist });
-
   return (
     <div className="playlist-page">
       <h1> Playlists </h1>

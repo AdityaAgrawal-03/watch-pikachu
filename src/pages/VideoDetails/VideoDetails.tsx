@@ -250,6 +250,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
                       type="checkbox"
                       onChange={() => updatePlaylist(_id)}
                       checked={isInPlaylist(_id)}
+                      className="dialog-checkbox"
                     />
 
                     {name}
@@ -258,7 +259,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
               </ul>
             </div>
 
-            <div>
+            <div className="dialog-input">
               <input
                 className="input-text input-text-sm"
                 type="text"
@@ -266,8 +267,8 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
                 placeholder="add a playlist"
                 onChange={(e) => setPlaylists(() => e.target.value)}
               />
-              <button className="btn-primary-icon" onClick={createPlaylist}>
-                <span className="material-icons-outlined">add</span>
+              <button className="btn btn-primary btn-dialog" onClick={createPlaylist}>
+                Add
               </button>
             </div>
 
@@ -276,7 +277,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
 
           <footer className="dialog-footer">
             <button
-              className="btn btn-primary dialog-modal-closeBtn"
+              className="btn"
               onClick={() => setModal(false)}
             >
               Close

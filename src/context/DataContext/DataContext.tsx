@@ -6,6 +6,7 @@ import {
   useAuth,
   setupAuthHeaderForServiceCalls,
 } from "../AuthContext/AuthContext";
+import { API_URL } from "../../utils/index";
 
 export type DataProviderProps = {
   children: React.ReactNode;
@@ -25,9 +26,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
       try {
         const {
           data: { success, videos },
-        } = await axios.get(
-          "https://watch-pikachu-backend.aditya365.repl.co/videos"
-        );
+        } = await axios.get(`${API_URL}/videos`);
         console.log({ success });
         if (success) {
           dispatch({ type: "INITIALIZE_VIDEOS", payload: videos });
@@ -44,9 +43,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
       try {
         const {
           data: { likedVideos },
-        } = await axios.get(
-          "https://watch-pikachu-backend.aditya365.repl.co/liked"
-        );
+        } = await axios.get(`${API_URL}/liked`);
         dispatch({
           type: "INITIALIZE_LIKED_VIDEOS",
           payload: likedVideos.videos,
@@ -54,9 +51,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 
         const {
           data: { historyVideos },
-        } = await axios.get(
-          "https://watch-pikachu-backend.aditya365.repl.co/history"
-        );
+        } = await axios.get(`${API_URL}/history`);
         dispatch({
           type: "INITIALIZE_HISTORY_VIDEOS",
           payload: historyVideos.videos,
@@ -64,9 +59,7 @@ export const DataProvider = ({ children }: DataProviderProps) => {
 
         const {
           data: { playlists },
-        } = await axios.get(
-          "https://watch-pikachu-backend.aditya365.repl.co/playlists"
-        );
+        } = await axios.get(`${API_URL}/playlists`);
         dispatch({
           type: "INITIALIZE_PLAYLISTS",
           payload: playlists.playlists,

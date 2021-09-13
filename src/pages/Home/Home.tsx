@@ -6,7 +6,7 @@ export function Home() {
   const {
     state: { videos },
   } = useData();
-  console.log(videos);
+
 
   return (
     <div className="home-page">
