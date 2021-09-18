@@ -7,14 +7,22 @@ export function Home() {
     state: { videos },
   } = useData();
 
-
   return (
     <div className="home-page">
-      <div className="video-container">
-        {videos.map((video) => (
-          <VideoCard key={video._id} videoItem={video} />
-        ))}
-      </div>
+      {!videos.length ? (
+        <div className="spinner">
+          <div></div>
+          <div></div>
+        </div>
+      ) : (
+        <>
+          <div className="video-container">
+            {videos.map((video) => (
+              <VideoCard key={video._id} videoItem={video} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
