@@ -25,6 +25,7 @@
 
 .playlist-video-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .playlist-video-card {
