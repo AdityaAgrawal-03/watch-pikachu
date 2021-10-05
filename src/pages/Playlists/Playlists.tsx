@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../../context/DataContext/DataContext";
 import "./Playlist.css";
@@ -6,6 +7,10 @@ export function Playlists() {
   const {
     state: { playlist },
   } = useData();
+
+  useEffect(() => {
+    document.title = `Pikachu | Playlists`;
+  }, []);
 
   return (
     <div className="playlist-page">

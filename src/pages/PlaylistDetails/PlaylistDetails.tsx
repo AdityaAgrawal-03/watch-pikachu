@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useData } from "../../context/DataContext/DataContext";
 import "./PlaylistDetails.css";
@@ -80,7 +80,9 @@ export function PlaylistDetails() {
     }
   };
 
-
+  useEffect(() => {
+    document.title = `Pikachu | ${playlistItem?.name} `
+  }, [playlistItem?.name])
 
   return (
     <div className="playlist-detail-page">

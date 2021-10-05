@@ -3,6 +3,7 @@ import { HistoryVideoCard } from "../../components/HistoryVideoCard/HistoryVideo
 import "./History.css";
 import axios from "axios";
 import { API_URL } from "../../utils/index"
+import { useEffect } from "react";
 
 export function History() {
   const {
@@ -21,6 +22,10 @@ export function History() {
       dispatch({ type: "CLEAR_SEARCH_HISTORY" });
     }
   };
+
+  useEffect(() => {
+    document.title = "Pikachu | History"
+  }, [])
 
   return (
     <div className="history-page">

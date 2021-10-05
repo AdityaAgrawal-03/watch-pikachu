@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import { defaultVideoType } from "../../data/data";
@@ -90,6 +90,10 @@ export function VideoDetails() {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    document.title = video?.title as string
+  }, [video?.title])
 
   return (
     <div className="video-page">
