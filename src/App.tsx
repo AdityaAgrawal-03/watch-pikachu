@@ -11,11 +11,13 @@ import {
   Playlists,
   LikedVideos,
 } from "./pages/index";
+import { ScrollToTop } from "./components/ScrollToTop";
 import { PrivateRoute } from "./PrivateRoute";
 
 function App() {
   return (
     <div>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
