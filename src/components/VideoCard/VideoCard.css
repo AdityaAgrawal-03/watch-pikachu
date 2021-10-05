@@ -3,7 +3,8 @@
   background-color: var(--default-color);
   margin-bottom: 2rem;
   color: rgba(0, 0, 0, 0.795);
-}
+ }
+
 
 .video-thumbnail-image {
   object-fit: cover;

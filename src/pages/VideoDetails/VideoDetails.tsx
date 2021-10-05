@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import { defaultVideoType } from "../../data/data";
 import { useData } from "../../context/DataContext/DataContext";
@@ -135,14 +135,14 @@ export function VideoDetails() {
             {isInWatchLater ? (
               <button
                 className="btn-primary-icon"
-                onClick={() => updatePlaylist(watchLaterPlaylist._id)}
+                onClick={() => updatePlaylist(watchLaterPlaylist?._id)}
               >
                 <span className="material-icons">watch_later</span>
               </button>
             ) : (
               <button
                 className="btn-primary-icon"
-                onClick={() => updatePlaylist(watchLaterPlaylist._id)}
+                onClick={() => updatePlaylist(watchLaterPlaylist?._id)}
               >
                 <span className="material-icons-outlined">watch_later</span>
               </button>
@@ -267,7 +267,10 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
                 placeholder="add a playlist"
                 onChange={(e) => setPlaylists(() => e.target.value)}
               />
-              <button className="btn btn-primary btn-dialog" onClick={createPlaylist}>
+              <button
+                className="btn btn-primary btn-dialog"
+                onClick={createPlaylist}
+              >
                 Add
               </button>
             </div>
@@ -276,10 +279,7 @@ export function ShowModal({ setModal, videoItem }: ShowModalProps) {
           </div>
 
           <footer className="dialog-footer">
-            <button
-              className="btn"
-              onClick={() => setModal(false)}
-            >
+            <button className="btn" onClick={() => setModal(false)}>
               Close
             </button>
           </footer>
