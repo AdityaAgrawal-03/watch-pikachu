@@ -1,5 +1,5 @@
 import { useData } from "../../context/DataContext/DataContext";
-import { VideoCard } from "../../components/VideoCard/VideoCard";
+import { LikedVideoCard } from "../../components/LikedVideoCard/LikedVideoCard";
 import "./Liked.css";
 
 export function LikedVideos() {
@@ -12,7 +12,7 @@ export function LikedVideos() {
       <h1>Liked</h1>
       <div className="liked-videos-container">
         {liked.map((videoItem) => (
-          <VideoCard key={videoItem?._id} videoItem={videoItem} />
+          <LikedVideoCard key={videoItem?._id} videoItem={videoItem} />
         ))}
       </div>
     </div>
