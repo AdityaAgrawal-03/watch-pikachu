@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import { VideoCard } from "../../components/VideoCard/VideoCard";
 import { useData } from "../../context/DataContext/DataContext";
 import "./PlaylistDetails.css";
-import { API_URL } from "../../utils/index"
+import { API_URL } from "../../utils/index";
+import { PlaylistVideoCard } from "../../components/PlaylistVideoCard/PlaylistVideoCard"
 
 const defaultPlaylistType = {
   playlistId: 999,
@@ -12,13 +12,13 @@ const defaultPlaylistType = {
   videos: [
     {
       _id: "1234",
-      url: "bad url",
-      thumbnail: "bad thumbnail",
-      title: "some title",
-      statistics: "kuch toh hai",
-      description: "bekar video",
-      channelName: "does not exist",
-      channelLogo: "kuch nahi hai bhai",
+      url: "default url",
+      thumbnail: "default thumbnail",
+      title: "default title",
+      statistics: "1000 views",
+      description: "default video description",
+      channelName: "default channel name",
+      channelLogo: "default channel logo",
     },
   ],
 };
@@ -45,14 +45,9 @@ export function PlaylistDetails() {
     try {
       const {
         data: { success, updatedPlaylist },
-      } = await axios.post(
-        `${API_URL}/playlists/${playlistId}`,
-        {
-          playlistUpdatedName: playlistName,
-        }
-      );
-
-      console.log({ success, updatedPlaylist });
+      } = await axios.post(`${API_URL}/playlists/${playlistId}`, {
+        playlistUpdatedName: playlistName,
+      });
 
       if (success) {
         dispatch({
@@ -72,9 +67,7 @@ export function PlaylistDetails() {
     try {
       const {
         data: { success },
-      } = await axios.delete(
-        `${API_URL}/playlists/${playlistId}`
-      );
+      } = await axios.delete(`${API_URL}/playlists/${playlistId}`);
       if (success) {
         dispatch({
           type: "DELETE_PLAYLIST",
@@ -86,6 +79,8 @@ export function PlaylistDetails() {
       console.error(error);
     }
   };
+
+
 
   return (
     <div className="playlist-detail-page">
@@ -128,7 +123,7 @@ export function PlaylistDetails() {
       </div>
       <div className="playlist-detail-video-container">
         {playlistItem.videos.map((videoItem) => (
-          <VideoCard key={videoItem._id} videoItem={videoItem} />
+          <PlaylistVideoCard key={videoItem._id} videoItem={videoItem} />
         ))}
       </div>
     </div>
