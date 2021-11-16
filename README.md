@@ -15,6 +15,7 @@ A video library app for cycling enthusiasts.
   - Unit tests for playlist
   - State management with context-api
   - TypeScript for type checking 
+  - designed with my CSS component library - [pedalUI](https://pedalui.netlify.app/) made in vanillaCSS
 
 # Tech-stack
   - TypeScript
