@@ -39,10 +39,10 @@ export const defaultVideoType : Video = {
   _id: "1234",
   url: "bad url",
   thumbnail: "bad thumbnail",
-  title: "some title",
-  statistics: "kuch toh hai",
-  description: "bekar video",
-  channelName: "does not exist",
-  channelLogo: "kuch nahi hai bhai"
+  title: "bad title",
+  statistics: "bad statistics",
+  description: "bad description",
+  channelName: "bad channelName",
+  channelLogo: "bad channelLogo"
 } 
 
