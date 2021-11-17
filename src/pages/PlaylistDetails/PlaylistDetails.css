@@ -1,0 +1,10 @@
+.playlist-detail-page {
+  margin: 1rem 4rem;
+}
+
+.playlist-detail-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+

@@ -1,0 +1,20 @@
+.history-page {
+  margin: 1rem 4rem;
+}
+
+.history-page-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-videos-container {
+  margin-top: 2rem;
+}
+
+.btn-clear-history {
+  display: flex;
+  background-color: none;
+}
+.btn-clear-history span {
+  margin-right: 0.5rem;
+}

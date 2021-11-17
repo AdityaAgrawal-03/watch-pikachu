@@ -1,0 +1,107 @@
+.video-page {
+  margin: 1rem 4rem;
+  height: 90vh;
+}
+
+.video-container {
+  margin: 0 auto;
+}
+
+.player-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  /* Player ratio: 100 / (1280 / 720) */
+}
+
+.video {
+  width: 100%;
+  background-color: var(--default-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.video-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.channel-details {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  background-color: var(--default-color);
+  width: 100%;
+}
+
+.channel-details-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.channel-details img {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 0.5rem;
+}
+
+.video-description {
+  width: 70%;
+}
+
+.dialog-content-container {
+  display: flex;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.dialog-content {
+  position: relative;
+  text-align: left;
+  border: none;
+  margin: auto;
+  width: 30%;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .5);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--font-color);
+  animation: animatedialog 0.8s;
+}
+
+@keyframes animatedialog {
+  from {
+    opacity: 0;
+    bottom: -50%;
+  }
+
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+} 
+
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-checkbox {
+  margin-right: 0.5rem;
+}
+
+.btn-dialog {
+  font-size: var(--fontSizes-md);
+  margin-left: 0.5rem;
+}
+
+.dialog-input {
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,1 @@
+export const API_URL = "https://watch-pikachu-backend.aditya365.repl.co";

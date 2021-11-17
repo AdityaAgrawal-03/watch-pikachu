@@ -1,0 +1,10 @@
+.liked-page {
+  margin: 1rem 4rem;
+}
+
+.liked-videos-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

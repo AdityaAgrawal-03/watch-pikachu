@@ -1,0 +1,36 @@
+.signup-page-content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.signup-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.signup-form-heading {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.signup-form {
+ align-self: center;
+ min-width: 50%;
+}
+
+.btn-signup {
+  text-transform: uppercase;
+  padding: 1rem;
+  margin-top: 1rem;
+  width: 60%;
+  align-self: center;
+  margin-right: 0;
+}
+
+.label {
+  text-align: left;
+  margin: 0.5rem;
+}
